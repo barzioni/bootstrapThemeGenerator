@@ -1,0 +1,145 @@
+#scene {
+  div {
+    width: 100%;
+    height: 100%;
+
+    div {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      img {
+        position: absolute;
+      }
+    }
+  }
+  > :nth-child(1) {
+    img {
+      @extend .x-align;
+      bottom: 0;
+      width: 120%;
+      @include media-breakpoint-up(md) {
+      }
+    }
+  }
+  > :nth-child(2) {
+    img {
+      @extend .y-align;
+      right: 0;
+      width: 150px;
+      transform: translateX(-135%);
+      @include media-breakpoint-up(md) {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        bottom: 0;
+        left: 1rem;
+        right: auto;
+        transform: none;
+      }
+    }
+  }
+  > :nth-child(3) {
+    img {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 1300px;
+      transform: translateX(-15%);
+      @include media-breakpoint-up(md) {
+        @include x-align;
+        bottom: 0;
+        width: 120%;
+      }
+    }
+  }
+  > :nth-child(4) {
+    img {
+      position: absolute;
+      right: 0;
+      bottom: 3.5rem;
+      width: 500px;
+      transform: translateX(45%);
+      @include media-breakpoint-up(md) {
+        @include x-align;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        bottom: 0;
+        right: auto;
+      }
+      //@include media-breakpoint-up(xl) {
+      //  width: 700px;
+      //}
+    }
+  }
+  > :nth-child(5) {
+    img {
+      @extend .x-align;
+      bottom: 0;
+      @include media-breakpoint-up(md) {
+        @include x-align;
+        width: 120%;
+        bottom: 0;
+      }
+    }
+  }
+}
+
+#scene_2 {
+  div {
+    width: 100%;
+    height: 100%;
+
+    div {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      img {
+        position: absolute;
+      }
+    }
+  }
+  > :nth-child(1) {
+    img {
+      @extend .x-align;
+      width: 200%;
+      bottom: 0;
+      @include media-breakpoint-up(md) {
+        @include x-align;
+        bottom: 0;
+        width: 120%;
+      }
+    }
+  }
+  > :nth-child(2) {
+    img {
+      width: 240px;
+      bottom: 0;
+      left: 0;
+      transform: translateX(-15%);
+      @include media-breakpoint-up(md) {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        bottom: 0;
+        right: auto;
+      }
+    }
+  }
+  > :nth-child(3) {
+    img {
+      @extend .x-align;
+      width: 200%;
+      bottom: 0;
+      @include media-breakpoint-up(md) {
+        @include x-align;
+        bottom: 0;
+        width: 120%;
+
+      }
+    }
+  }
+
+}

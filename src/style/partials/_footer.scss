@@ -1,0 +1,49 @@
+footer {
+  aside {
+    i {
+      transition: 0.2s ease-in-out;
+      transform-origin: center center;
+      &.is-active {
+        line-height: 0;
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+div[class^="menu-footer-"] {
+  display: none;
+  ul {
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    li {
+      list-style: none;
+      @extend .mt-2;
+      a, span {
+        display: block;
+        text-align: center;
+        margin-bottom: 0;
+        color: theme-color('color-2');
+        @extend .p;
+        &:hover {
+          color: theme-color('color-1')
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  div[class^="menu-footer-"] {
+    display: block;
+    ul{
+      li{
+        a,span{
+          text-align: right;
+
+        }
+      }
+    }
+  }
+}

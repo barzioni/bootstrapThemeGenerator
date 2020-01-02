@@ -1,0 +1,19 @@
+.hover-color-white {
+  &:hover {
+      color: white;
+  }
+}
+
+@for $i from 1 through 5 {
+  .hover-color-#{$i} {
+    &:hover {
+      color: theme-color("color-#{$i}");
+    }
+
+  }
+  .hover-bg-#{$i} {
+    &:hover {
+      background-color: theme-color("color-#{$i}");
+    }
+  }
+}

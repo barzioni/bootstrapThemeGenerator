@@ -1,0 +1,38 @@
+.js-clients-slider {
+  .slick-slide {
+    opacity: 0.5;
+    &.slick-center {
+      opacity: 1;
+    }
+  }
+}
+
+.slick-custom-dots {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  li {
+    .slick-dot {
+      height: 8px;
+      width: 8px;
+      cursor: pointer;
+      background: transparent;
+      display: block;
+      margin: 0 12px;
+      border: 1px solid;
+      border-radius: 50px;
+      @extend .border-color-2;
+    }
+    &.slick-active .slick-dot {
+      @extend .border-color-1;
+    }
+  }
+}
+
+.js-client-solutions{
+  .slick-list{
+    padding: 0 0 0 20% !important;
+  }
+}

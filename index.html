@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta http-Equiv="Cache-Control" Content="no-cache" />
+    <meta http-Equiv="Pragma" Content="no-cache" />
+    <meta http-Equiv="Expires" Content="0" />
+    <link rel="shortcut icon" type="image/png" href="./favicon.png" />
+    <title>SOGO Bootstrap Variables Setter</title>
+
+
+    <style>
+        body{
+            height: calc(100vh - 56px);
+            overflow: hidden;
+       }
+       ::-webkit-scrollbar { width: 0 !important }
+       .overflow-y-scroll{
+           overflow-y: scroll;
+       }
+       .user-alert{
+           position:fixed;
+           z-index: 9000;
+            top:calc(56px + 1rem);
+            right:1rem;
+        }
+       #input-groups a:hover{
+           background: #343a40;
+           color:#fff !important;
+       }
+ 
+        iframe{
+            width: 100%;
+            height: 100%;
+            outline: none;
+            border: none;
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+        }
+</style>
+</head>
+
+<body>
+    <div id="app" class="h-100">
+        <div v-if="settings.alert.show" class="user-alert alert" :class="'alert-' + settings.alert.type" role="alert">
+            {{settings.alert.text}}
+        </div>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">SOGO Bootstrap {{settings.name ? '- ' + settings.name : ''}}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <template v-if="settings.name">
+                    <div class="ml-auto">
+                        <button class='btn btn-sm btn-outline-warning' @click="saveTheme()">Save</button>
+                        <button class='btn btn-sm btn-outline-info' @click="refreshOutput()">Refresh</button>
+                        <button class='btn btn-sm btn-outline-info' data-toggle="modal" data-target="#calc_modal">Calculator</button>
+                        <button class='btn btn-sm btn-outline-info' data-toggle="modal" data-target="#scss_modal">Code</button>
+                        <button class='btn btn-sm btn-outline-danger' @click="changeOutput()">Compile (DEV ONLY)</button>
+                        <button class='btn btn-sm btn-outline-danger' @click="deleteTheme()">Delete</button>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="row ml-auto">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <select class="form-control" @change="getTheme($event)">
+                                    <option selected disabled>Select from existing...</option>
+                                    <option :value="option.name" v-for="option in settings.options">{{option.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Create new project" aria-label="Create new project"
+                                    aria-describedby="button-addon2" ref="pname">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" id="button-addon2" @click="createNewProject">Create</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </nav>
+        <div class="container-fluid h-100">
+            <div v-if="settings.name" class="row h-100">
+
+
+
+
+
+                <div class="col-3 px-0 bg-light h-100 overflow-y-scroll">
+                    <div class="accordion" id="input-groups">
+                        <div v-for="(group, gi) in variables">
+
+                            <a href="#" class="py-1 border-bottom pl-2 d-block text-decoration-none text-capitalize text-dark"
+                                data-toggle="collapse" :data-target="'#collapse_'+gi | convertToNameNospace">
+                                {{gi | convertToName }}
+                            </a>
+
+                            <div :id="'collapse_' + gi | convertToNameNospace" class="collapse px-2 mb-2" data-parent="#input-groups">
+
+                                <div v-for="(variable, vi) in group" v-if="!variable.hidden">
+
+                                    <span><small>{{vi | convertToName }} ({{variable.type}}{{variable.units ? ' - ' +
+                                            variable.units : ''}})</small></span>
+
+                                    <div v-if="variable.options" class="input-group">
+                                        <select class="form-control" v-model="variable.value" @change="changeOutput()">
+                                            <option :value="oi" v-for="(option, oi) in variable.options">{{option}}</option>
+                                        </select>
+                                    </div>
+
+                                    <div v-else-if="variable.type === 'color'" class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text" :style="'background-color:' + variable.value"></div>
+                                        </div>
+                                        <input type="text" class="form-control" v-model="variable.value" @keyup="changeOutput()">
+                                    </div>
+
+                                    <div v-else class="input-group">
+                                        <input :type="variable.type" class="form-control" v-model="variable.value"
+                                            @keyup="changeOutput()">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-9">
+                    <iframe id="output" src="./dist/template.php"></iframe>
+                </div>
+
+
+
+
+
+            </div>
+            <div v-else class="d-flex justify-content-center align-items-center h-100">
+                <span class="h1">Select project or use existing one...</span>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="calc_modal" tabindex="-1" role="dialog" aria-labelledby="calc_modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{calculator.type}} converter</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" v-model="calculator.type" value="Pixels to Rem" id="pixels_to_rem" name="pixels_to_rem"
+                                class="custom-control-input">
+                            <label class="custom-control-label" for="pixels_to_rem">Pixels to Rem</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" v-model="calculator.type" value="Rem to Pixels" id="rem_to_pixels" name="rem_to_pixels"
+                                class="custom-control-input">
+                            <label class="custom-control-label" for="rem_to_pixels">Rem to Pixels</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Default pixel size</label>
+                            <input type="number" class="form-control" v-model="calculator.default">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">{{calculator.type === 'Pixels to Rem' ? 'Pixels' : 'Rem'}}</label>
+                            <input type="text" class="form-control" v-model="calculator.value">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="">Result in {{calculator.type === 'Pixels to Rem' ? 'Rem' : 'Pixels'}}</label>
+                            <input type="text" class="form-control" v-model="calculator.result" readonly>
+                        </div>
+
+                        <div class="alert alert-primary" role="alert">
+                            <template v-if="calculator.type === 'Pixels to Rem'">
+                                <span class="h4">How&nbsp;many Rems&nbsp;are in a Pixel?</span><br>
+                                <span>If base = 16 px</span><br>
+                                <span>1 px = 0.0625 rem</span>
+                            </template>
+                            <template v-else>
+                                <span class="h4">How&nbsp;many Pixels&nbsp;are in a Rem?</span><br>
+                                <span>If base = 16 px</span><br>
+                                <span>1 rem&nbsp;= 16&nbsp;px</span>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="scss_modal" tabindex="-1" role="dialog" aria-labelledby="scss_modal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">SCSS:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-dark">
+                        <code ref="data">
+
+                            <template v-for="(group, gi) in variables">
+                                <template v-if="gi === '$theme-colors'">
+                                    <template v-if="notHaveEmptyValues(gi)">
+                                        $theme-colors: (
+                                        <template v-for="(variable, vi) in variables[gi]" v-if="variable.value">
+                                            "{{vi}}" : {{variable.value}},
+                                        </template>
+                                        );
+                                    </template>
+                                </template>
+
+
+                                <template v-else>
+                                    <template v-for="(variable, vi) in group" v-if="variable.value">
+                                        {{vi}} : {{variable.before}} {{variable.value}}{{variable.units ?
+                                        variable.units : ''}} {{variable.default ? '!default' : ''}}; <br>
+                                    </template>
+                                </template>
+
+
+                            </template>
+
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="variables.js"></script>
+    <script src="scripts.js"></script>
+
+
+</body>
+
+</html>

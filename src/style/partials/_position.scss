@@ -1,0 +1,118 @@
+@mixin x-align {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+}
+%x-align{
+  @include x-align
+}
+.x-align {
+ @extend %x-align
+}
+
+@mixin y-align {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+%y-align{
+  @include y-align
+}
+.y-align {
+  @extend %y-align
+}
+
+@mixin xy-align {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+%xy-align{
+  @include xy-align
+}
+.xy-align {
+  @extend %xy-align
+}
+
+
+
+// Positions
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .position-#{$breakpoint}-relative{
+      position:relative !important;
+    }
+
+    .position-#{$breakpoint}-absolute{
+      position:absolute !important;
+    }
+
+    @each $prop,
+    $abbrev in (position: pos) {
+
+      @each $size,
+      $length in $spacers {
+
+        .#{$abbrev}-t#{$infix}-#{$size} {
+          top: $length !important;
+        }
+
+        .#{$abbrev}-r#{$infix}-#{$size} {
+          right: $length !important;
+        }
+
+        .#{$abbrev}-b#{$infix}-#{$size} {
+          bottom: $length !important;
+        }
+
+        .#{$abbrev}-l#{$infix}-#{$size} {
+          left: $length !important;
+        }
+      }
+    }
+
+    // Negative positions (e.g., where `.pos-b-n1` is negative version of `.pos-b-1`)
+    @each $size, $length in $spacers {
+      @if $size != 0 {
+        .pos-t#{$infix}-n#{$size} {
+          top: -$length !important;
+        }
+        .pos-r#{$infix}-n#{$size} {
+          right: -$length !important;
+        }
+        .pos-b#{$infix}-n#{$size} {
+          bottom: -$length !important;
+        }
+        .pos-l#{$infix}-n#{$size} {
+          left: -$length !important;
+        }
+      }
+    }
+
+  }
+}
+
+@for $i from 1 through 10 {
+  .z-index-minus-#{$i} {
+    z-index: -#{$i};
+  }
+  .z-index-#{$i} {
+    z-index: #{$i};
+  }
+}

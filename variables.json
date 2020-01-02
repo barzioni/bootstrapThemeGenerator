@@ -1,0 +1,298 @@
+var variables = {
+    "root": {
+        "$font-size-base": {
+            "type": "number",
+            "default": true,
+            "value": "1"
+        },
+        "$font-family-sans-serif": {
+            "options": {
+                "'Alef', sans-serif": "Alef",
+                "'Assistant', sans-serif": "Assistant",
+                "'Heebo', sans-serif": "Heebo",
+                "'OpenSansHebrew', sans-serif": "OpenSansHebrew",
+                "Rubik', sans-serif": "Rubik"
+            },
+            "value": "'Alef', sans-serif",
+            "default": true
+        },
+        "$font-family-base": {
+            "hidden": true,
+            "value": "$font-family-sans-serif"
+        },
+        "$spacer": {
+            "type": "number"
+        }
+    },
+    "text": {
+        "$font-weight-lighter": {
+            "type": "number",
+            "default": true
+        },
+        "$font-weight-light": {
+            "type": "number",
+            "default": true
+        },
+        "$font-weight-normal": {
+            "type": "number",
+            "default": true
+        },
+        "$font-weight-bold": {
+            "type": "number",
+            "default": true
+        },
+        "$font-weight-bolder": {
+            "type": "number",
+            "default": true
+        },
+        "$h1-font-size": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$h2-font-size": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$h3-font-size": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$h4-font-size": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$h5-font-size": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$h6-font-size": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$icon-xs": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$icon-s": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$icon-m": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$icon-l": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$icon-xl": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        },
+        "$icon-xxl": {
+            "type": "number",
+            "before": "$font-size-base *",
+            "default": true
+        }
+    },
+    "colors": {
+        "$white": {
+            "type": "color",
+            "default": true
+        },
+        "$gray-100": {
+            "type": "color",
+            "default": true
+        },
+        "$gray-200": {
+            "type": "color",
+            "default": true
+        },
+        "$gray-300": {
+            "type": "color",
+            "default": true
+        },
+        "$gray-400": {
+            "type": "color",
+            "default": true
+        },
+        "$gray-500": {
+            "type": "color",
+            "default": true
+        },
+        "$gray-600": {
+            "type": "color",
+            "default": true
+        },
+        "$gray-700": {
+            "type": "color",
+            "default": true
+        },
+        "$gray-800": {
+            "type": "color",
+            "default": true
+        },
+        "$gray-900": {
+            "type": "color",
+            "default": true
+        },
+        "$black": {
+            "type": "color",
+            "default": true
+        },
+        "$primary": {
+            "type": "color",
+            "default": true
+        },
+        "$secondary": {
+            "type": "color",
+            "default": true
+        },
+        "$success": {
+            "type": "color",
+            "default": true
+        },
+        "$info": {
+            "type": "color",
+            "default": true
+        },
+        "$warning": {
+            "type": "color",
+            "default": true
+        },
+        "$danger": {
+            "type": "color",
+            "default": true
+        },
+        "$light": {
+            "type": "color",
+            "default": true
+        },
+        "$dark": {
+            "type": "color",
+            "default": true
+        },
+        "$body-color": {
+            "type": "color",
+            "default": true,
+            "value": "#000"
+        }
+    },
+    "$theme-colors": {
+        "color-1": {
+            "type": "color",
+            "default": true
+        },
+        "color-2": {
+            "type": "color",
+            "default": true
+        },
+        "color-3": {
+            "type": "color",
+            "default": true
+        },
+        "color-4": {
+            "type": "color",
+            "default": true
+        },
+        "color-5": {
+            "type": "color",
+            "default": true
+        },
+        "gray-1": {
+            "type": "color",
+            "default": true
+        },
+        "gray-2": {
+            "type": "color",
+            "default": true
+        },
+        "gray-3": {
+            "type": "color",
+            "default": true
+        },
+        "gray-4": {
+            "type": "color",
+            "default": true
+        },
+        "gray-5": {
+            "type": "color",
+            "default": true
+        }
+    },
+    "links": {
+        "$link-color": {
+            "hidden": true,
+            "value": "#666"
+        },
+        "$link-decoration": {
+            "hidden": true,
+            "value": "none"
+        },
+        "$link-hover-decoration": {
+            "hidden": true,
+            "value": "none"
+        }
+    },
+    "inputs": {
+        "$input-border-radius": {
+            "type": "number",
+            "units": "px"
+        },
+        "$input-bg": {
+            "hidden": true,
+            "value": "#fff"
+        },
+        "$input-border-color": {
+            "hidden": true,
+            "value": "#eee"
+        },
+        "$input-box-shadow": {
+            "type": "text"
+        },
+        "$input-border-width": {
+            "type": "number"
+        },
+        "$input-focus-border-color": {
+            "type": "color"
+        },
+        "$form-group-margin-bottom": {
+            "hidden": true,
+            "value": 0
+        }
+    },
+    "buttons": {
+        "$btn-border-radius": {
+            "type": "number",
+            "units": "px"
+        },
+        "$input-btn-padding-y": {
+            "type": "number"
+        }
+    },
+    "others": {
+        "$border-radius": {
+            "hidden": true,
+            "value": "$font-size-base"
+        },
+
+        "$box-shadow-1": {
+            "type": "text"
+        },
+        "$box-shadow-2": {
+            "type": "text"
+        }
+
+    }
+}

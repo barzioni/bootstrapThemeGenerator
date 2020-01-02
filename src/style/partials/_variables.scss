@@ -1,0 +1,64 @@
+$font-size-base:  1rem !default; 
+$font-family-sans-serif:  'Rubik', sans-serif !default; 
+$font-family-base:  $font-family-sans-serif ; 
+$spacer:  2rem ; 
+$font-weight-lighter:  100 !default; 
+$font-weight-light:  300 !default; 
+$font-weight-normal:  400 !default; 
+$font-weight-bold:  500 !default; 
+$font-weight-bolder:  700 !default; 
+$h1-font-size: $font-size-base * 2.13 !default; 
+$h1-font-size-mobile:  2.13 !default; 
+$h1-font-weight:  300 ; 
+$h2-font-size: $font-size-base * 1.60 !default; 
+$h2-font-size-mobile: $font-size-base * 1.60 !default; 
+$h2-font-weight:  400 ; 
+$h3-font-size: $font-size-base * 1.20 !default; 
+$h3-font-size-mobile: $font-size-base * 1.20 !default; 
+$h3-font-weight:  400 ; 
+$h4-font-size: $font-size-base * 1 !default; 
+$h4-font-size-mobile: $font-size-base * 1 !default; 
+$h4-font-weight:  500 ; 
+$h5-font-size: $font-size-base * 0.93 !default; 
+$h5-font-size-mobile: $font-size-base * 0.93 !default; 
+$h5-font-weight:  500 ; 
+$h6-font-size: $font-size-base * 0.87 !default; 
+$h6-font-size-mobile: $font-size-base * 0.87 !default; 
+$h6-font-weight:  400 ; 
+$p-font-size: $font-size-base * 1 !default; 
+$p-font-size-mobile: $font-size-base * 1 !default; 
+$p-font-weight:  400 ; 
+$slider-title-font-size: $font-size-base * 2.5 !default; 
+$slider-title-font-size-mobile:  2.5 !default; 
+$slider-title-font-weight:  400 ; 
+$slider-subtitle-font-size: $font-size-base * 2 !default; 
+$slider-subtitle-font-size-mobile: $font-size-base * 2 !default; 
+$slider-subtitle-font-weight:  400 ; 
+$bread-crumbs-font-size: $font-size-base * 1 !default; 
+$bread-crumbs-font-weight:  400 ; 
+$icon-xs: $font-size-base * 1.07 !default; 
+$icon-s: $font-size-base * 1.6 !default; 
+$icon-m: $font-size-base * 2.13 !default; 
+$icon-l: $font-size-base * 3.2 !default; 
+$icon-xl: $font-size-base * 4.27 !default; 
+$icon-xxl: $font-size-base * 8 !default; 
+$primary:  #eb297a !default; 
+$body-color:  #484848 !default; 
+$theme-colors: (
+color-1: #eb297a, 
+color-2: #33c7d8, 
+color-3: #fdb13c, 
+color-4: #7461ea, 
+color-5: #fafafa, 
+color-6: #d1d1d1, 
+color-7: #949494, 
+color-8: #484848, 
+);
+$link-color:  #666 ; 
+$link-decoration:  none ; 
+$link-hover-decoration:  none ; 
+$input-border-radius:  3px ; 
+$input-bg:  #fafafa ; 
+$btn-border-radius:  3px ; 
+$border-radius:  $font-size-base ; 
+$box-shadow:  -2px 0 10px 0 rgba(72,72,72,0.07) !default; 
